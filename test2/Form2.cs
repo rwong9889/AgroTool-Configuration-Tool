@@ -1706,6 +1706,11 @@ namespace test2
             }
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (serial_portform2.IsOpen)
