@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Management;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -40,19 +41,11 @@ namespace test2
             //not connected enable comboboxes
             com_port.Enabled = true;
             //disable configure button if not connected
-            configure_button.Enabled = false;
+            configure_button.Enabled = true;
             disconnect_button.Enabled = false;
-            LoadConfigurationSettings();
+            //Enter ASCII Encoding
+            //serial_port1.Encoding = Encoding.GetEncoding(28591);
 
-        }
-
-        //Load COM Port Configurations from XML File
-        private void LoadConfigurationSettings()
-        {
-            baudrate.Text = System.Configuration.ConfigurationManager.AppSettings["combaudrate"];
-            databits.Text = System.Configuration.ConfigurationManager.AppSettings["comdatabits"];
-            stopbits.Text = System.Configuration.ConfigurationManager.AppSettings["comstopbits"];
-            parity.Text = System.Configuration.ConfigurationManager.AppSettings["comparity"];
         }
 
         //Button to establish connection to COM port
@@ -60,17 +53,18 @@ namespace test2
         {
             try
             {
-                serial_port1 = new SerialPort(com_port.Text, Convert.ToInt32(label3.Text), (Parity)Enum.Parse(typeof(Parity), label14.Text), Convert.ToInt32(label7.Text), (StopBits)Enum.Parse(typeof(StopBits), label11.Text));
+                serial_port1 = new SerialPort(com_port.Text, Convert.ToInt32(baudrate.Text), (Parity)Enum.Parse(typeof(Parity), parity.Text), Convert.ToInt32(databits.Text), (StopBits)Enum.Parse(typeof(StopBits), stopbits.Text));
                 serialPort1.PortName = com_port.Text;
                 serialPort1.BaudRate = Convert.ToInt32(baudrate.Text);
                 serialPort1.DataBits = Convert.ToInt32(databits.Text);
                 serialPort1.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopbits.Text);
                 serialPort1.Parity = (Parity)Enum.Parse(typeof(Parity), parity.Text);
-                serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
                 serialPort1.Open();
                 //check whether the port is connected then function executes
                 if (serialPort1.IsOpen)
                 {
+
+                    textBox1.Text += DataReceivedString + Environment.NewLine;
                     connection_bar.Visible = true;
                     connection_bar.Style = ProgressBarStyle.Marquee;
                     com_connection_status.Text = "CONNECTING";
@@ -86,31 +80,52 @@ namespace test2
 
                     // When software established connection with Agromon hardware
                     // Send 0xAA 0x55 \r\n to Agromon to enter Configuration mode automatically before the 10s timeout.
-                    if(DataReceivedString == "AGROMON READY\r\n")
-                    {
-                        if(DataReceivedString == "OK\r\n")
-                        {
-                            serialPort1.Write("ªU");
-                            textBox1.Text += DataReceivedString + Environment.NewLine;
-                            if (DataReceivedString == "CONFIGURATION MODE\r\n")
-                            {
-                                if (DataReceivedString == "OK\r\n")
-                                {
 
+                    //textBox1.Text += DataReceivedString + Environment.NewLine;
+                    //if (DataReceivedString == "AGROMON READY\r\nOK\r\n")
+                    //{
+                    serialPort1.Write("ªU");
+                    wait(1000);
+                    textBox1.Text += DataReceivedString + Environment.NewLine;
+                    if (DataReceivedString == "CONFIGURATION MODE\r\nOK\r\n")
+                    {   
+                        //Recieved the data from agromon 
+                        if (DataReceivedString == "COM\r\n")
+                        {
+                            network_set.Text = DataReceivedString;
+                            if (DataReceivedString == "SEN1\r\n")
+                            {
+                                sensor1.Text = DataReceivedString;
+                                if (DataReceivedString == "SEN2\r\n")
+                                {
+                                    sensor2.Text = DataReceivedString;
+                                    if (DataReceivedString == "SEN3\r\n")
+                                    {
+                                        sensor3.Text = DataReceivedString;
+                                    }
                                 }
                             }
-                            //Recieved Data From Agromon                                
                         }
+                        network_status.Text = "CONNECTED";
+                        network_status.ForeColor = Color.Green;
                     }
-
-
+                    else
+                    {
+                        //When COM FRESH recieved
+                        network_set.Text = "NOT AVAILABLE";
+                        sensor1.Text = "NOT AVAILABLE";
+                        sensor2.Text = "NOT AVAILABLE";
+                        sensor3.Text = "NOT AVAILABLE";
+                        network_status.Text = "NOT CONNECTED";
+                        network_status.ForeColor = Color.Red;
+                    }
+                }
                     configure_button.Enabled = true;
                     disconnect_button.Enabled = true;
                     connect_button.Enabled = false;
                     com_connection_status.Text = "CONNECTED";
                     com_connection_status.ForeColor = Color.Green;
                     connection_bar.Style = ProgressBarStyle.Blocks;
-                }
             }
             catch (Exception)
             {
@@ -153,23 +168,9 @@ namespace test2
             }
         }
 
-        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                DataReceived = serialPort1.ReadLine();
-                this.Invoke(new Action(ProcessingData));
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-
-
-        }
-
-        private void ProcessingData()
-        {
+            DataReceived = serialPort1.ReadExisting();
             DataReceivedString = DataReceived.ToString();
         }
 
@@ -209,7 +210,6 @@ namespace test2
                 serialPort1.DiscardOutBuffer();
                 serialPort1.DiscardInBuffer();
                 serialPort1.Close();
-                serialPort1.DataReceived -= new SerialDataReceivedEventHandler(DataReceivedHandler);
                 connection_bar.Value = 0;
 
                 com_connection_status.ForeColor = Color.Red;
@@ -247,7 +247,6 @@ namespace test2
             {
                 serialPort1.DiscardOutBuffer();
                 serialPort1.DiscardInBuffer();
-                serialPort1.DataReceived -= new SerialDataReceivedEventHandler(DataReceivedHandler);
             }
         }
 
@@ -290,6 +289,9 @@ namespace test2
             com_port.Items.AddRange(ports);
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
 

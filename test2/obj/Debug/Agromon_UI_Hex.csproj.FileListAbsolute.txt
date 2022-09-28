@@ -70,9 +70,6 @@ C:\Users\pokem\OneDrive\Desktop\ARGOMON UI\Agromon-Latest-Update-Third_Branch\te
 C:\Users\pokem\OneDrive\Desktop\ARGOMON UI\Agromon-Latest-Update-Third_Branch\test2\obj\Debug\test2.Properties.Resources.resources
 C:\Users\pokem\OneDrive\Desktop\ARGOMON UI\Agromon-Latest-Update-Third_Branch\test2\obj\Debug\Agromon_UI_Hex.csproj.CoreCompileInputs.cache
 C:\Users\pokem\OneDrive\Desktop\ARGOMON UI\Agromon-Latest-Update-Third_Branch\test2\obj\Debug\Agromon_UI_Hex.csproj.CopyComplete
-D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.2.1.exe.config
-D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.2.1.exe
-D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.2.1.pdb
 D:\Documents\Intern Project\Latest\test2\bin\Debug\System.CodeDom.dll
 D:\Documents\Intern Project\Latest\test2\bin\Debug\System.Configuration.ConfigurationManager.dll
 D:\Documents\Intern Project\Latest\test2\bin\Debug\System.Security.AccessControl.dll
@@ -88,9 +85,12 @@ D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon_UI_Hex.csproj.Suggest
 D:\Documents\Intern Project\Latest\test2\obj\Debug\test2.Form1.resources
 D:\Documents\Intern Project\Latest\test2\obj\Debug\test2.Form2.resources
 D:\Documents\Intern Project\Latest\test2\obj\Debug\test2.Form3.resources
-D:\Documents\Intern Project\Latest\test2\obj\Debug\test2.Properties.Resources.resources
 D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon_UI_Hex.csproj.GenerateResource.cache
 D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon_UI_Hex.csproj.CoreCompileInputs.cache
 D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon_UI_Hex.csproj.CopyComplete
-D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon Config Tools V 1.2.1.exe
-D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon Config Tools V 1.2.1.pdb
+D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.3.1.exe.config
+D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.3.1.exe
+D:\Documents\Intern Project\Latest\test2\bin\Debug\Agromon Config Tools V 1.3.1.pdb
+D:\Documents\Intern Project\Latest\test2\obj\Debug\s.Properties.Resources.resources
+D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon Config Tools V 1.3.1.exe
+D:\Documents\Intern Project\Latest\test2\obj\Debug\Agromon Config Tools V 1.3.1.pdb

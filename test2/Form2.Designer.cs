@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+
        #region Windows Form Designer generated code
 
         /// <summary>
@@ -343,6 +344,7 @@
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.MenuText;
+            this.textBox3.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox3.ForeColor = System.Drawing.Color.Chartreuse;
             this.textBox3.Location = new System.Drawing.Point(7, 28);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1944,11 +1946,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1537, 1033);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
             this.Name = "Form2";
             this.Text = "AgroTool Configurations";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);

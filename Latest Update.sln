@@ -5,16 +5,27 @@ VisualStudioVersion = 17.3.32728.150
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agromon_UI_Hex", "test2\Agromon_UI_Hex.csproj", "{C485D74E-3273-4388-ABE6-77C42A700796}"
 EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Agromon Config Tool", "Agromon Config Tool\Agromon Config Tool.aiproj", "{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C485D74E-3273-4388-ABE6-77C42A700796}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{C485D74E-3273-4388-ABE6-77C42A700796}.All|Any CPU.Build.0 = Release|Any CPU
 		{C485D74E-3273-4388-ABE6-77C42A700796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C485D74E-3273-4388-ABE6-77C42A700796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C485D74E-3273-4388-ABE6-77C42A700796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C485D74E-3273-4388-ABE6-77C42A700796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.All|Any CPU.ActiveCfg = All
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.All|Any CPU.Build.0 = All
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.Debug|Any CPU.ActiveCfg = All
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.Debug|Any CPU.Build.0 = All
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.Release|Any CPU.ActiveCfg = All
+		{0CF90ED3-DEEC-49E9-9579-4E64FB7B2221}.Release|Any CPU.Build.0 = All
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

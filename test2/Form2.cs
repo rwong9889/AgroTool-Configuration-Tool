@@ -430,8 +430,6 @@ namespace test2
             label5.Visible = false;
             label34.Visible = false;
             label8.Visible = false;
-            listBox1.Visible = false;
-            listBox2.Visible = false;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -446,16 +444,12 @@ namespace test2
             label5.Visible = false;
             label34.Visible = false;
             label8.Visible = false;
-            listBox1.Visible = false;
-            listBox2.Visible = false;
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             label34.Visible = true;
             label8.Visible = true;
-            listBox1.Visible = true;
-            listBox2.Visible = true;
             label2.Visible = false;
             textBox1.Visible = false;
             label3.Visible = false;
@@ -480,8 +474,6 @@ namespace test2
             label5.Visible = true;
             label34.Visible = false;
             label8.Visible = false;
-            listBox1.Visible = false;
-            listBox2.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1198,6 +1190,7 @@ namespace test2
             button11.Enabled = true;
             button10.Enabled = true;
             button9.Enabled = true;
+            this.AutoScroll = true;
 
             if (!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked)
             {
@@ -1211,8 +1204,6 @@ namespace test2
                 label5.Visible = false;
                 label34.Visible = false;
                 label8.Visible = false;
-                listBox1.Visible = false;
-                listBox2.Visible = false;
             }
 
             if (label16.Text == "Not Available")

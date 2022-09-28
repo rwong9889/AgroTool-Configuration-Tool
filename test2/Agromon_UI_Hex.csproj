@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C485D74E-3273-4388-ABE6-77C42A700796}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>test2</RootNamespace>
-    <AssemblyName>Agromon Config Tools V 1.2.1</AssemblyName>
+    <RootNamespace>s</RootNamespace>
+    <AssemblyName>Agromon Config Tools V 1.3.1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
