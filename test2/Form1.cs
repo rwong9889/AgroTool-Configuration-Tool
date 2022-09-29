@@ -56,6 +56,7 @@ namespace test2
         {
             try
             {
+                timer1.Start();
                 serial_port1 = new SerialPort(com_port.Text, Convert.ToInt32(baudrate.Text), (Parity)Enum.Parse(typeof(Parity), parity.Text), Convert.ToInt32(databits.Text), (StopBits)Enum.Parse(typeof(StopBits), stopbits.Text));
                 serialPort1.PortName = com_port.Text;
                 serialPort1.BaudRate = Convert.ToInt32(baudrate.Text);
@@ -66,9 +67,7 @@ namespace test2
                 //check whether the port is connected then function executes
                 if (serialPort1.IsOpen)
                 {
-                    timer1.Start();
-                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
-                    serial_port1.Encoding = System.Text.Encoding.GetEncoding(1252); 
+                    serial_port1.Encoding = System.Text.Encoding.GetEncoding(1252);
                     textBox1.Text += DataReceivedString + Environment.NewLine;
                     connection_bar.Visible = true;
                     connection_bar.Style = ProgressBarStyle.Marquee;
@@ -85,68 +84,64 @@ namespace test2
 
                     // When software established connection with Agromon hardware
                     // Send 0xAA 0x55 \r\n to Agromon to enter Configuration mode automatically before the 10s timeout.
+                    //    if (DataReceivedString == "OK\r\n")
+                    //    {
+                    //        textBox1.Text += "<TX> "+ timestamp + " " + "ªU" + "<CR><LF>"+ Environment.NewLine;
+                    //        if (DataReceivedString == "CONFIGURATION MODE\r\nOK\r\n")
+                    //        {
+                    //            textBox1.Text += "<RX> " + timestamp + " " + "CONFIGURATION MODE " + "<CR><LF>" + Environment.NewLine;
+                    //            textBox1.Text += "<RX> " + timestamp + " " + "OK " + "<CR><LF>" + Environment.NewLine;
+                    //            //Recieved the data from agromon 
+                    //            if (DataReceivedString == "COM\r\n")
+                    //            {
+                    //                network_set.Text = DataReceivedString;
+                    //                textBox1.Text += "<RX> " + timestamp + " " + "COM " + "<CR><LF>" + Environment.NewLine;
+                    //                network_set.Text = DataReceivedString;
+                    //                textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
 
-                    //textBox1.Text += DataReceivedString + Environment.NewLine;
-                    //if (DataReceivedString == "AGROMON READY\r\nOK\r\n")
-                    //{
-                    serialPort1.Write("ªU");
-                    wait(1000);
-                    serialPort1.Write("ªU");
-                    wait(1000);
-                    textBox1.Text += "<TX> "+ timestamp + " " + "ªU" + "<CR><LF>"+ Environment.NewLine;
-                    if (DataReceivedString == "CONFIGURATION MODE\r\nOK\r\n")
-                    {
-                        textBox1.Text += "<RX> " + timestamp + " " + "CONFIGURATION MODE " + "<CR><LF>" + Environment.NewLine;
-                        textBox1.Text += "<RX> " + timestamp + " " + "OK " + "<CR><LF>" + Environment.NewLine;
-                        //Recieved the data from agromon 
-                        if (DataReceivedString == "COM\r\n")
-                        {
-                            network_set.Text = DataReceivedString;
-                            textBox1.Text += "<RX> " + timestamp + " " + "COM " + "<CR><LF>" + Environment.NewLine;
-                            network_set.Text = DataReceivedString;
-                            textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                    //                if (DataReceivedString == "SEN1\r\n")
+                    //                {
+                    //                    sensor1.Text = DataReceivedString;
+                    //                    textBox1.Text += "<RX> " + timestamp + " " + "SEN1 " + "<CR><LF>" + Environment.NewLine;
+                    //                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
 
-                            if (DataReceivedString == "SEN1\r\n")
-                            {
-                                sensor1.Text = DataReceivedString;
-                                textBox1.Text += "<RX> " + timestamp + " " + "SEN1 " + "<CR><LF>" + Environment.NewLine;
-                                textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
-                                
-                                if (DataReceivedString == "SEN2\r\n")
-                                {
-                                    sensor2.Text = DataReceivedString;
-                                    textBox1.Text += "<RX> " + timestamp + " " + "SEN2 " + "<CR><LF>" + Environment.NewLine;
-                                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                    //                    if (DataReceivedString == "SEN2\r\n")
+                    //                    {
+                    //                        sensor2.Text = DataReceivedString;
+                    //                        textBox1.Text += "<RX> " + timestamp + " " + "SEN2 " + "<CR><LF>" + Environment.NewLine;
+                    //                        textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
 
-                                    if (DataReceivedString == "SEN3\r\n")
-                                    {
-                                        sensor3.Text = DataReceivedString;
-                                        textBox1.Text += "<RX> " + timestamp + " " + "SEN3 " + "<CR><LF>" + Environment.NewLine;
-                                        textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
-                                    }
-                                }
-                            }
-                        }
-                        network_status.Text = "CONNECTED";
-                        network_status.ForeColor = Color.Green;
-                    }
-                    else
-                    {
-                        //When COM FRESH recieved
-                        network_set.Text = "NOT AVAILABLE";
-                        sensor1.Text = "NOT AVAILABLE";
-                        sensor2.Text = "NOT AVAILABLE";
-                        sensor3.Text = "NOT AVAILABLE";
-                        network_status.Text = "NOT CONNECTED";
-                        network_status.ForeColor = Color.Red;
-                    }
+                    //                        if (DataReceivedString == "SEN3\r\n")
+                    //                        {
+                    //                            sensor3.Text = DataReceivedString;
+                    //                            textBox1.Text += "<RX> " + timestamp + " " + "SEN3 " + "<CR><LF>" + Environment.NewLine;
+                    //                            textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                    //                        }
+                    //                    }
+                    //                }
+                    //                network_status.Text = "CONNECTED";
+                    //                network_status.ForeColor = Color.Green;
+                    //            }
+
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        //When COM FRESH recieved
+                    //        network_set.Text = "NOT AVAILABLE";
+                    //        sensor1.Text = "NOT AVAILABLE";
+                    //        sensor2.Text = "NOT AVAILABLE";
+                    //        sensor3.Text = "NOT AVAILABLE";
+                    //        network_status.Text = "NOT CONNECTED";
+                    //        network_status.ForeColor = Color.Red;
+                    //    }
                 }
-                    configure_button.Enabled = true;
-                    disconnect_button.Enabled = true;
-                    connect_button.Enabled = false;
-                    com_connection_status.Text = "CONNECTED";
-                    com_connection_status.ForeColor = Color.Green;
-                    connection_bar.Style = ProgressBarStyle.Blocks;
+                configure_button.Enabled = true;
+                disconnect_button.Enabled = true;
+                connect_button.Enabled = false;
+                com_connection_status.Text = "CONNECTED";
+                com_connection_status.ForeColor = Color.Green;
+                connection_bar.Style = ProgressBarStyle.Blocks;
             }
             catch (Exception)
             {
@@ -166,24 +161,70 @@ namespace test2
 
             }
         }
+        //private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        //{
 
-        //TImer to read always read data
+        //    try
+        //    {
+        //        DataReceived = serialPort1.ReadLine();
+        //        this.Invoke(new Action(ProcessingData));
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        MessageBox.Show(err.Message);
+        //    }
+        //}
+
+        //private void ProcessingData()
+        //{
+        //    DataReceivedString = DataReceived.ToString();
+        //}
+
+        //Timer to read always read data
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
             try
             {
                 DataReceived = serialPort1.ReadLine();
-                DataReceivedString = DataReceived.ToString();
-                if(DataReceivedString == "OK")
+                String j = DataReceived.ToString();
+                string[] DataReceivedStrings = j.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                textBox1.Text += "<RX> " + timestamp + " " + DataReceivedStrings[0] + " <CR><LF> " + Environment.NewLine;
+                textBox1.Text += "<RX> " + timestamp + " " + DataReceivedStrings[1] + " <CR><LF> " + Environment.NewLine;
+                if (DataReceivedStrings[1] == "OK")
                 {
-                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                    serialPort1.DiscardOutBuffer();
+                    serialPort1.DiscardInBuffer();
                 }
-                
+
             }
             finally
             {
-                timer1.Start();
+
+                serialPort1.Write("ªU\r\n");
+                wait(2000);
+                String m = serialPort1.ReadLine().ToString();
+                string[] DataReceivedStringss = m.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                if (DataReceivedString == null)
+                {
+
+                }
+                else
+                {
+                    if (DataReceivedStringss[0] == "START NORMAL MODE")
+                    {
+                        textBox1.Text += "<RX> " + timestamp + " " + "Cannot Enter CONFIGURATION MODE" + Environment.NewLine;
+                        textBox1.Text += "<RX> " + timestamp + " " + "Please restart AGROMON" + Environment.NewLine;
+                    }
+                    if (DataReceivedStringss[0] == "\r")
+                    {
+
+                        textBox1.Text += "<TX> " + timestamp + " " + "0xAA 0x55" + "<CR><LF>" + Environment.NewLine;
+                        textBox1.Text += "<RX> " + timestamp + "Hai " + DataReceivedString + "\r\n" + " <CR> <LF>" + Environment.NewLine;
+                    }
+                    timer1.Start();
+                }
             }
         }
 

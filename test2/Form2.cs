@@ -1349,9 +1349,9 @@ namespace test2
                     DateTime dateTime = DateTime.Now;
                     String timestamp = dateTime.ToString();
                     textBox3.Text += timestamp + " Reading Data, Please Wait..." + Environment.NewLine;
-                    serial_portform2.WriteLine("network" + "\r\n");
+                    serial_portform2.WriteLine("WIFISET" + "\r\n");
                     wait(3000);
-                    serial_portform2.WriteLine("network" + "\r\n");
+                    serial_portform2.WriteLine("WIFISET" + "\r\n");
                     wait(3000);
                     if (dataReceivedStringForm2 == null)
                     {
