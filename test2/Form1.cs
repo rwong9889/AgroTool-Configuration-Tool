@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO.Ports;
@@ -13,6 +14,8 @@ namespace test2
     public partial class Form1 : Form
     {
         //Variable Definition
+        Timer tm;
+        String timestamp = DateTime.Now.ToString();
         public SerialPort serial_port1; //Serial Port 1 Variable
         public string DataReceived; //Variable to store RX data
         public string DataReceivedString; //Varialbe to store RX data converted to string
@@ -44,7 +47,7 @@ namespace test2
             configure_button.Enabled = true;
             disconnect_button.Enabled = false;
             //Enter ASCII Encoding
-            //serial_port1.Encoding = Encoding.GetEncoding(28591);
+          
 
         }
 
@@ -63,7 +66,9 @@ namespace test2
                 //check whether the port is connected then function executes
                 if (serialPort1.IsOpen)
                 {
-
+                    timer1.Start();
+                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                    serial_port1.Encoding = System.Text.Encoding.GetEncoding(1252); 
                     textBox1.Text += DataReceivedString + Environment.NewLine;
                     connection_bar.Visible = true;
                     connection_bar.Style = ProgressBarStyle.Marquee;
@@ -86,22 +91,38 @@ namespace test2
                     //{
                     serialPort1.Write("ªU");
                     wait(1000);
-                    textBox1.Text += DataReceivedString + Environment.NewLine;
+                    serialPort1.Write("ªU");
+                    wait(1000);
+                    textBox1.Text += "<TX> "+ timestamp + " " + "ªU" + "<CR><LF>"+ Environment.NewLine;
                     if (DataReceivedString == "CONFIGURATION MODE\r\nOK\r\n")
-                    {   
+                    {
+                        textBox1.Text += "<RX> " + timestamp + " " + "CONFIGURATION MODE " + "<CR><LF>" + Environment.NewLine;
+                        textBox1.Text += "<RX> " + timestamp + " " + "OK " + "<CR><LF>" + Environment.NewLine;
                         //Recieved the data from agromon 
                         if (DataReceivedString == "COM\r\n")
                         {
                             network_set.Text = DataReceivedString;
+                            textBox1.Text += "<RX> " + timestamp + " " + "COM " + "<CR><LF>" + Environment.NewLine;
+                            network_set.Text = DataReceivedString;
+                            textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+
                             if (DataReceivedString == "SEN1\r\n")
                             {
                                 sensor1.Text = DataReceivedString;
+                                textBox1.Text += "<RX> " + timestamp + " " + "SEN1 " + "<CR><LF>" + Environment.NewLine;
+                                textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                                
                                 if (DataReceivedString == "SEN2\r\n")
                                 {
                                     sensor2.Text = DataReceivedString;
+                                    textBox1.Text += "<RX> " + timestamp + " " + "SEN2 " + "<CR><LF>" + Environment.NewLine;
+                                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+
                                     if (DataReceivedString == "SEN3\r\n")
                                     {
                                         sensor3.Text = DataReceivedString;
+                                        textBox1.Text += "<RX> " + timestamp + " " + "SEN3 " + "<CR><LF>" + Environment.NewLine;
+                                        textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
                                     }
                                 }
                             }
@@ -146,6 +167,26 @@ namespace test2
             }
         }
 
+        //TImer to read always read data
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            try
+            {
+                DataReceived = serialPort1.ReadLine();
+                DataReceivedString = DataReceived.ToString();
+                if(DataReceivedString == "OK")
+                {
+                    textBox1.Text += "<RX> " + timestamp + " " + DataReceivedString + " <CR><LF>" + Environment.NewLine;
+                }
+                
+            }
+            finally
+            {
+                timer1.Start();
+            }
+        }
+
         //wait function
         private void wait(int milliseconds)
         {
@@ -166,12 +207,6 @@ namespace test2
             {
                 Application.DoEvents();
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            DataReceived = serialPort1.ReadExisting();
-            DataReceivedString = DataReceived.ToString();
         }
 
         //Button to refresh COM port available.
@@ -287,10 +322,6 @@ namespace test2
             //this code only gets the com port number
             string[] ports = SerialPort.GetPortNames();
             com_port.Items.AddRange(ports);
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }

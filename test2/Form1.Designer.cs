@@ -50,7 +50,6 @@
             this.connection_bar = new System.Windows.Forms.ProgressBar();
             this.com_port = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
@@ -95,6 +94,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -165,7 +165,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1473, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1473, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -319,19 +319,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Serial COM Log";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.MenuText;
-            this.textBox1.ForeColor = System.Drawing.Color.Chartreuse;
-            this.textBox1.Location = new System.Drawing.Point(7, 28);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(635, 341);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox3
             // 
@@ -797,6 +784,16 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.MenuText;
+            this.textBox1.ForeColor = System.Drawing.Color.Chartreuse;
+            this.textBox1.Location = new System.Drawing.Point(6, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(636, 348);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -819,7 +816,6 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
@@ -863,7 +859,6 @@
         private System.Windows.Forms.ProgressBar connection_bar;
         private System.Windows.Forms.ComboBox com_port;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button configure_button;
@@ -915,6 +910,7 @@
         private System.Windows.Forms.ComboBox baudrate;
         private System.Windows.Forms.ComboBox parity;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox textBox1;
     }
 }
 
